@@ -1,0 +1,127 @@
+Payflo: Program Requirements Document
+This document outlines the functional and non-functional requirements for the Payflo application, a SaaS platform designed for freelancers and small businesses to manage clients, create and send invoices, and track payments.
+
+1. User Roles & Personas
+Business Owner: The primary user of the platform. This persona represents a freelancer or small business manager who needs to manage their finances, bill clients, and monitor revenue.
+
+Client: The recipient of an invoice. This persona has limited access and can only view and pay the invoices sent to them.
+
+2. Functional Requirements
+2.1 User Authentication & Authorization
+FR-101: User Registration: Users must be able to create a new Business Owner account using an email and password.
+
+FR-102: Social Sign-Up/Sign-In: Users should have the option to register and log in using third-party providers (e.g., Google, GitHub).
+
+FR-103: User Sign-In/Sign-Out: Registered users must be able to log in to their account and securely log out.
+
+FR-104: Password Reset: Users must be able to reset their password via a secure "Forgot Password" email link.
+
+FR-105: Route Protection: All application routes beyond the landing and authentication pages must be protected, requiring a user to be logged in.
+
+FR-106: Data Isolation: A user must only be able to access and manage their own data (clients, invoices, etc.). They must not be able to view or modify data belonging to other users.
+
+2.2 Dashboard
+FR-201: Key Performance Indicators (KPIs): The dashboard must display at-a-glance financial statistics for the logged-in user, including:
+
+Total Revenue (Year-to-date)
+
+Outstanding (Pending) Amount
+
+Overdue Amount
+
+Total Active Clients
+
+FR-202: Revenue Chart: The dashboard must feature a visual chart (e.g., bar chart) displaying income over the last 6-12 months.
+
+FR-203: Recent Invoices List: The dashboard must show a list of the 5-10 most recently created or updated invoices with their status (e.g., Paid, Sent, Overdue).
+
+FR-204: Overdue Invoices Alert: A clearly visible section should highlight any invoices that are past their due date.
+
+2.3 Client Management
+FR-301: Create Client: Users must be able to add a new client with the following details: Client Name, Email Address, Phone Number, and Physical Address.
+
+FR-302: View Clients: Users must be able to view a list of all their clients.
+
+FR-303: View Client Details: Users must be able to select a client to see their full details and a complete history of all invoices associated with them.
+
+FR-304: Update Client: Users must be able to edit the information of an existing client.
+
+FR-305: Delete Client: Users must be able to delete a client. The system should prevent deletion if the client has existing, non-voided invoices.
+
+2.4 Invoice Management
+FR-401: Create Invoice: Users must be able to create a new invoice by selecting a client and adding line items. Each line item must include a description, quantity, and unit price.
+
+FR-402: Auto-Calculation: The system must automatically calculate the total for each line item, the subtotal for all items, and allow for adding tax (as a percentage) to calculate the final grand total.
+
+FR-403: Invoice Numbering: The system must automatically generate a unique, sequential invoice number for each new invoice.
+
+FR-404: Invoice Fields: Invoices must include: Issue Date, Due Date, and a section for notes/payment terms.
+
+FR-405: Invoice Statuses: Each invoice must have a status. The system must support at a minimum:
+
+Draft: Created but not sent.
+
+Sent: Emailed to the client.
+
+Paid: Payment has been confirmed.
+
+Overdue: Past the due date and not fully paid.
+
+Void: Cancelled and no longer payable.
+
+FR-406: Invoice Actions: Users must be able to perform the following actions on an invoice:
+
+Save as Draft
+
+Send to Client (via Email)
+
+Mark as Paid (for manual payments)
+
+Duplicate an existing invoice to create a new one
+
+Void an invoice
+
+FR-407: List & Filter Invoices: Users must be able to view a list of all invoices and filter them by status, client, and date range.
+
+2.5 Payment Processing
+FR-501: Manual Payment Tracking: Users must be able to manually mark an invoice as "Paid".
+
+FR-502: Payment Gateway Integration: The system must integrate with at least one major payment provider (e.g., Stripe) to allow online payments.
+
+FR-503: Client Payment Portal: When a client receives an invoice link, it must lead to a secure, public-facing page where they can view the invoice details and click a "Pay Now" button.
+
+FR-504: Automated Status Update: Upon successful payment via the integrated payment gateway, the system must automatically update the invoice status to "Paid".
+
+FR-505: Payment Confirmation: Both the Business Owner and the paying Client must receive an automated email receipt upon successful payment.
+
+2.6 Document & Notification System
+FR-601: PDF Generation: The system must be able to generate a professional, print-ready PDF version of any invoice.
+
+FR-602: Email Invoices: Users must be able to send an invoice directly from the application to the client's email address. The email should contain a link to the payment portal and/or the PDF invoice as an attachment.
+
+2.7 Reporting
+FR-701: Invoice Report: Users must be able to generate a report of all invoices within a specified date range, with options to filter by client and status.
+
+FR-702: Revenue Report: The system must provide a report summarizing total income collected over a specified period.
+
+FR-703: Tax Report: The system must provide a report summarizing total taxes collected for a given period.
+
+FR-704: Data Export: All reports must be exportable to a CSV format.
+
+2.8 Settings
+FR-801: User Profile: Users must be able to update their name and email address.
+
+FR-802: Business Information: Users must be able to set their business name, address, and upload a business logo to be displayed on all invoices.
+
+FR-803: Integration Management: Users must be able to securely connect and manage their payment gateway accounts (e.g., connect their Stripe account).
+
+3. Non-Functional Requirements
+NFR-1: Security: The application must use industry-standard security practices, including data encryption (both in transit and at rest), protection against common web vulnerabilities (XSS, CSRF), and secure handling of all financial data.
+
+NFR-2: Performance: All pages must load within 3 seconds under normal network conditions. Database queries must be optimized to handle a growing user base without significant degradation.
+
+NFR-3: Usability: The user interface must be modern, clean, and intuitive. The application must be fully responsive and functional on desktop, tablet, and mobile devices.
+
+NFR-4: Reliability: The application should aim for 99.9% uptime and implement regular, automated database backups to prevent data loss.
+
+NFR-5: Accessibility: The application should adhere to Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards to be usable by people with disabilities.
